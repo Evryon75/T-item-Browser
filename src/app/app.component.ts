@@ -49,7 +49,9 @@ export class AppComponent {
         data().forEach(d => {
           //@ts-ignore
           d.cargoquery.forEach(c => { // For every search result found, add it to the list
+            // TODO: convert the rest here lol
             c.title.tooltip = strip_html(c.title.tooltip)
+
             collector.push(c.title);
           })
         }).then(() => { // Once that's done update the original array
@@ -73,7 +75,8 @@ let strip_html = (s: string) => s
   .replace(/&amp;/g, '&')
   .replace(/&quot;/g, '"')
   .replace(/&apos;/g, "'")
-  .replace(/<[^>]*>/g, '');
+  .replace(/<[^>]*>/g, '')
+  .replaceAll("'", '');
 
 interface Item {
   name: string,
