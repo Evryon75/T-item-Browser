@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { WeaponsComponent } from './weapons/weapons.component';
 import { EquipablesComponent } from './equipables/equipables.component';
 import { ToolsComponent } from './tools/tools.component';
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { ToolsComponent } from './tools/tools.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

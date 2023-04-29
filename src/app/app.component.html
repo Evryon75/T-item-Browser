@@ -1,8 +1,9 @@
 <button routerLink="weapons">Weapons</button>
 <button routerLink="tools">Tools</button>
 <button routerLink="equipables">Equipables</button>
-<input #search (change)="request()">
-<button (click)="request()">Search</button>
-<p>{{data | json}}</p>
-
+<input #search>
+<div style="background: #260000; border-radius: 10px; padding: 10px">
+  DEBUGGING
+  <p>{{data | json}}</p>
+</div>
 <router-outlet></router-outlet>
