@@ -2,8 +2,10 @@
 <button routerLink="tools">Tools</button>
 <button routerLink="equipables">Equipables</button>
 <input #search>
+
+<router-outlet></router-outlet>
+
 <div style="background: #260000; border-radius: 10px; padding: 10px">
   DEBUGGING
-  <p>{{data | json}}</p>
+  <pre>{{data | json}}</pre>
 </div>
-<router-outlet></router-outlet>
