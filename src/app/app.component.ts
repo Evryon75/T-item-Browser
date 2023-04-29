@@ -27,7 +27,7 @@ export class AppComponent {
         "?action=cargoquery" +
         "&format=json" +
         "&tables=Items" +
-        "&fields=name%2C%20damage%2C%20rare%2C%20knockback%2C%20critical%2C%20velocity" +
+        "&fields=name%2C%20damage%2C%20rare%2C%20knockback%2C%20critical%2C%20velocity%2C%20defense%2C%20axe%2C%20hammer" +
         "&where=name%20LIKE%20'" + item + "%25'" +
         "&origin=*";
       let response = signal(this.http.get(url))
