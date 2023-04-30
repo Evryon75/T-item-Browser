@@ -1,8 +1,9 @@
 import {Component, signal, ViewChild} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {parse_item} from "./value_parser";
-import {Item, Tag, URL} from "./helper_module"
-import {distribute_items, EQUIPABLE_LIST, reset, TOOL_LIST, WEAPON_LIST} from "./global_data";
+import {Item, URL} from "./helper_module"
+import {distribute_items, reset} from "./global_data";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-root',
@@ -17,8 +18,9 @@ export class AppComponent {
   @ViewChild("search") imp: HTMLInputElement;
   // @ts-ignore
   @ViewChild("sect") sect: HTMLHeadElement;
-  constructor(public http: HttpClient) {
+  constructor(public http: HttpClient, private router: Router) {
     (window as any).debug_toggle = this.debug_toggle.bind(this);
+    this.router.navigateByUrl("weapons").then(() => {})
     setInterval(() => {
       //@ts-ignore
       let item = this.imp.nativeElement.value;

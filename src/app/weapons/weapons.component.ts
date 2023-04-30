@@ -2,6 +2,7 @@ import {Component, signal, ViewChild} from '@angular/core';
 import {Item, format_image} from "../helper_module";
 import {WEAPON_LIST} from "../global_data";
 import {HttpClient} from "@angular/common/http";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-weapons',
@@ -68,5 +69,3 @@ export class WeaponsComponent {
     })
   }
 }
-
-//todo: MAKE THEM HAVE RARITY COLORS well maybe we'll see
