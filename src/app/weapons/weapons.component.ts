@@ -12,7 +12,7 @@ export class WeaponsComponent {
 
   @ViewChild("icon") icon!: HTMLImageElement;
   data: Item[] = [];
-  selection: Item = {
+  selection: Item = { // Shown values
     axe: undefined,
     critical: 0,
     damage: 0,
@@ -44,7 +44,7 @@ export class WeaponsComponent {
   }
   find_image(name: string) {
 
-    let formatted_img = format_image(name);
+    let formatted_img = format_image(name); // Formats what to search
     let image_request = "https://terraria.wiki.gg/api.php?action=query&prop=imageinfo&titles=" + formatted_img + "&iiprop=url&format=json&origin=*"
     let actual_image = signal(this.http.get(image_request));
 
@@ -54,16 +54,16 @@ export class WeaponsComponent {
       images.push(image)
     }).then(() => {
       let url;
-      try {
+      try { // Try to collect the url to an image
         //@ts-ignore
         url = Object.values(Object.values(images[0].query.pages)[0].imageinfo)[0].url
       } catch (e) {
-        url = "https://illinoislawforyou.com/wp-content/uploads/2013/11/no-fault-divorce-illinois-chicago-jpeg.webp"
+        url = "https://illinoislawforyou.com/wp-content/uploads/2013/11/no-fault-divorce-illinois-chicago-jpeg.webp" // Failed
       }
 
       if (url.endsWith(formatted_img.replace("File:", "")) || url == "https://illinoislawforyou.com/wp-content/uploads/2013/11/no-fault-divorce-illinois-chicago-jpeg.webp") {
         //@ts-ignore
-        this.icon.nativeElement.src = url
+        this.icon.nativeElement.src = url // Apply the changes
       }
     })
   }

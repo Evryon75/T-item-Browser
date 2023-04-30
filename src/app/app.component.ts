@@ -29,7 +29,6 @@ export class AppComponent {
       else if (this.last_item != item) {
         this.last_item = item;
 
-        // Leaving it at this to add "search by" features later
         let request = URL + "&where=name%20LIKE%20'" + item + "%25'"
         let collector: Item[] = []
 
