@@ -1,1 +1,16 @@
-make the tools stuff
+<h2 (click)="select(item.name)" *ngFor="let item of data" style="margin-left: -25%">
+  <div style="display: flex">
+    <div style="cursor: pointer">
+      {{item.name}}
+      <p style="font-size: medium; margin-top: -6px; color: gray; font-style: italic">{{item.tooltip}}</p>
+    </div>
+  </div>
+</h2>
+
+<h4 style="margin-top: 20px">Name: {{this.selection.name}}</h4>
+<h4 style="margin-top: 60px">Axe power: {{this.selection.axe}}</h4>
+<h4 style="margin-top: 100px">Pickaxe power: {{this.selection.pick}}</h4>
+<h4 style="margin-top: 140px">Hammer power: {{this.selection.hammer}}</h4>
+<h4 style="margin-top: 180px">Use time: {{this.selection.usetime}}</h4>
+<h4 style="margin-top: 220px">Knockback: {{this.selection.knockback}}</h4>
+<h4 style="margin-top: 260px">Tooltip: {{this.selection.tooltip}}</h4>

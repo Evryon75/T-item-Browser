@@ -1,1 +1,12 @@
-make the equipable stuff
+<h2 (click)="select(item.name)" *ngFor="let item of data" style="margin-left: -25%">
+  <div style="display: flex">
+    <div style="cursor: pointer">
+      {{item.name}}
+      <p style="font-size: medium; margin-top: -6px; color: gray; font-style: italic">{{item.tooltip}}</p>
+    </div>
+  </div>
+</h2>
+
+<h4 style="margin-top: 20px">Name: {{this.selection.name}}</h4>
+<h4 style="margin-top: 60px">Defense: {{this.selection.defense}}</h4>
+<h4 style="margin-top: 100px">Tooltips: {{this.selection.tooltip}}</h4>

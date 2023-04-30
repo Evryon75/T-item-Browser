@@ -1,0 +1,53 @@
+h2 {
+  color: #ff4e4e;
+  max-width: 60%;
+  height: 40px;
+  position: relative;
+}
+h2:hover {
+  color: #7485bd;
+  left: 20px;
+  animation-name: h2-hover;
+  animation-duration: 0.3s;
+}
+h2:not(hover) {
+  animation-name: h2-not-hover;
+  animation-duration: 0.3s;
+}
+h2:active {
+
+}
+@keyframes h2-hover {
+  from {
+    left: 0;
+    color: #ff4e4e;
+  }
+  to {
+    left: 20px;
+    color: #7485bd;
+  }
+}
+@keyframes h2-not-hover {
+  from {
+    left: 20px;
+    color: #7485bd;
+  }
+  to {
+    left: 0;
+    color: #ff4e4e;
+  }
+}
+img {
+  height: 200px;
+  position: fixed;
+  top: 10%;
+  left: 60%;
+}
+
+h4 {
+  position: fixed;
+  top: 30%;
+  left: 60.5%;
+  border-bottom: 1px solid gray;
+  font-size: 20px;
+}

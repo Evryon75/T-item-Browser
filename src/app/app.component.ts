@@ -1,7 +1,8 @@
 import {Component, signal, ViewChild} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {parse_item} from "./value_parser";
-import {format_fields, Item, Tag} from "./helper-module"
+import {Item, Tag, URL} from "./helper_module"
+import {distribute_items, EQUIPABLE_LIST, reset, TOOL_LIST, WEAPON_LIST} from "./global_data";
 
 @Component({
   selector: 'app-root',
@@ -11,10 +12,13 @@ import {format_fields, Item, Tag} from "./helper-module"
 export class AppComponent {
   data: Item[] = [];
   last_item: string = "";
+  debug = false;
   // @ts-ignore
   @ViewChild("search") imp: HTMLInputElement;
-
+  // @ts-ignore
+  @ViewChild("sect") sect: HTMLHeadElement;
   constructor(public http: HttpClient) {
+    (window as any).debug_toggle = this.debug_toggle.bind(this);
     setInterval(() => {
       //@ts-ignore
       let item = this.imp.nativeElement.value;
@@ -24,40 +28,32 @@ export class AppComponent {
         this.last_item = item;
 
         // Leaving it at this to add "search by" features later
-        let request = url + "&where=name%20LIKE%20'" + item + "%25'"
+        let request = URL + "&where=name%20LIKE%20'" + item + "%25'"
         let collector: Item[] = []
 
         let data = signal(this.http.get(request));
         data().forEach(data => {
+
           //@ts-ignore
           data.cargoquery.forEach(query => {
             collector.push(parse_item(query.title));
           })
         }).then(() => {
+
+          reset();
           this.data = collector;
+          distribute_items(this.data);
         })
       }
     }, 10)
   }
-}
 
-const url: string =
-  "https://terraria.fandom.com/api.php" +
-  "?action=cargoquery" +
-  "&format=json" +
-  "&origin=*" +
-  "&tables=Items" +
-  format_fields([
-    "name",
-    "damage",
-    "usetime",
-    "knockback",
-    "critical",
-    "velocity",
-    "defense",
-    "axe",
-    "hammer",
-    "pick",
-    "tooltip",
-    "mana",
-  ]);
+  change_section(section: string) {
+    //@ts-ignore
+    this.sect.nativeElement.innerText = section;
+  }
+
+  debug_toggle(): void {
+    this.debug = !this.debug;
+  }
+}

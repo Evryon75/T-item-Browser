@@ -1,12 +1,17 @@
-<button routerLink="weapons">Weapons</button>
-<button routerLink="tools">Tools</button>
-<button routerLink="equipables">Equipables</button>
-<input #search>
 
+
+<div id="top-container" style="margin-left: -48%">
+  <h1 #sect>Weapons</h1>
+  <button (click)="change_section('Weapons')" routerLink="weapons">Weapons</button>
+  <button (click)="change_section('Tools')" routerLink="tools">Tools</button>
+  <button (click)="change_section('Equipables')" routerLink="equipables">Equipables</button>
+</div>
+
+<input #search style="width: 50%; margin-top: 10px; margin-left: -25%">
 <router-outlet></router-outlet>
 
 <!-- DEBUGGING SECTION -->
-<div style="background: #260000; border-radius: 10px; padding: 10px">
-  DEBUGGING // ADD A TOGGLE OR REMOVE THIS ENTIRELY IN PRODUCTION
+<div id="debugger" *ngIf="debug">
+  DEBUGGING (These are the cleaned up objects received from the api)
   <pre>{{data | json}}</pre>
 </div>

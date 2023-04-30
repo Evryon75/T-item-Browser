@@ -1,0 +1,14 @@
+#top-container {
+  width: 100%;
+  text-align: center;
+}
+#debugger {
+  background: #260000;
+  border-radius: 10px;
+  padding: 10px;
+  margin-left: -530px;
+  margin-right: -530px;
+  width: 135%;
+  margin-top: 300px;
+  min-height: 300px;
+}

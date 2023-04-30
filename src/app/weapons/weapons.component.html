@@ -1,1 +1,17 @@
-make the wepaons stuff
+<h2 (click)="select(item.name)" *ngFor="let item of data" style="margin-left: -25%">
+  <div style="display: flex">
+    <div style="cursor: pointer">
+      {{item.name}}
+      <p style="font-size: medium; margin-top: -6px; color: gray; font-style: italic; min-height: 300px">{{item.tooltip}}</p>
+    </div>
+  </div>
+</h2>
+
+<img #icon>
+<h4 style="margin-top: 20px">Name: {{this.selection.name}}</h4>
+<h4 style="margin-top: 60px">Damage: {{this.selection.damage}}</h4>
+<h4 style="margin-top: 100px">Knockback: {{this.selection.knockback}}</h4>
+<h4 style="margin-top: 140px">Critical chance: {{this.selection.critical}}</h4>
+<h4 style="margin-top: 180px">Use time: {{this.selection.usetime}}</h4>
+<h4 style="margin-top: 220px">Velocity: {{this.selection.velocity}}</h4>
+<h4 style="margin-top: 260px">Tooltip: {{this.selection.tooltip}}</h4>
