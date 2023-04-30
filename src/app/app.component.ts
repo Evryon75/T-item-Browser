@@ -36,6 +36,7 @@ export class AppComponent {
             "defense",
             "axe",
             "hammer",
+            "pick",
             "tooltip",
             "mana",
           ]) +
@@ -50,7 +51,7 @@ export class AppComponent {
           //@ts-ignore
           d.cargoquery.forEach(c => { // For every search result found, add it to the list
             // TODO: convert the rest here lol
-            c.title.tooltip = strip_html(c.title.tooltip)
+            if (c.title.tooltip != null) c.title.tooltip = strip_html(c.title.tooltip);
 
             collector.push(c.title);
           })
@@ -61,6 +62,11 @@ export class AppComponent {
     }, 10)
   }
 }
+
+function value_parser(obj: Item): void {
+
+}
+
 // Simple function to format fields in a legible way
 function format_fields(fields: string[]): string {
   let result = "&fields=";
