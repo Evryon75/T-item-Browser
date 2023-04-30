@@ -1,5 +1,7 @@
 import {Component, signal, ViewChild} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
+import {parse_item} from "./value_parser";
+import {format_fields, Item, Tag} from "./helper-module"
 
 @Component({
   selector: 'app-root',
@@ -17,45 +19,21 @@ export class AppComponent {
       //@ts-ignore
       let item = this.imp.nativeElement.value;
 
-      if (item == "") this.data = []; // Clear the results if the search is empty
-      else if (this.last_item != item) { // Don't search the same thing over and over again
-
+      if (item == "") this.data = [];
+      else if (this.last_item != item) {
         this.last_item = item;
-        let url: string =
-          "https://terraria.fandom.com/api.php" +
-          "?action=cargoquery" +
-          "&format=json" +
-          "&tables=Items" +
-          format_fields([
-            "name",
-            "damage",
-            "usetime",
-            "knockback",
-            "critical",
-            "velocity",
-            "defense",
-            "axe",
-            "hammer",
-            "pick",
-            "tooltip",
-            "mana",
-          ]) +
-          "&where=name%20LIKE%20'" + item + "%25'" +
-          "&origin=*";
 
-        // Request data through a signal
-        let data = signal(this.http.get(url));
-        // Temp array used to keep the original one intact until new results are found
+        // Leaving it at this to add "search by" features later
+        let request = url + "&where=name%20LIKE%20'" + item + "%25'"
         let collector: Item[] = []
-        data().forEach(d => {
-          //@ts-ignore
-          d.cargoquery.forEach(c => { // For every search result found, add it to the list
-            // TODO: convert the rest here lol
-            if (c.title.tooltip != null) c.title.tooltip = strip_html(c.title.tooltip);
 
-            collector.push(c.title);
+        let data = signal(this.http.get(request));
+        data().forEach(data => {
+          //@ts-ignore
+          data.cargoquery.forEach(query => {
+            collector.push(parse_item(query.title));
           })
-        }).then(() => { // Once that's done update the original array
+        }).then(() => {
           this.data = collector;
         })
       }
@@ -63,37 +41,23 @@ export class AppComponent {
   }
 }
 
-function value_parser(obj: Item): void {
-
-}
-
-// Simple function to format fields in a legible way
-function format_fields(fields: string[]): string {
-  let result = "&fields=";
-  fields.forEach(field => {
-    result += field + "%2C%20";
-  });
-  return result;
-}
-let strip_html = (s: string) => s
-  .replace(/&lt;/g, '<')
-  .replace(/&gt;/g, '>')
-  .replace(/&amp;/g, '&')
-  .replace(/&quot;/g, '"')
-  .replace(/&apos;/g, "'")
-  .replace(/<[^>]*>/g, '')
-  .replaceAll("'", '');
-
-interface Item {
-  name: string,
-  damage: string,
-  usetime: string,
-  knockback: string,
-  critical: string,
-  velocity: string,
-  defense: string,
-  axe: string,
-  hammer: string,
-  mana: string,
-  tooltip: string,
-}
+const url: string =
+  "https://terraria.fandom.com/api.php" +
+  "?action=cargoquery" +
+  "&format=json" +
+  "&origin=*" +
+  "&tables=Items" +
+  format_fields([
+    "name",
+    "damage",
+    "usetime",
+    "knockback",
+    "critical",
+    "velocity",
+    "defense",
+    "axe",
+    "hammer",
+    "pick",
+    "tooltip",
+    "mana",
+  ]);
