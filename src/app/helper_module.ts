@@ -56,7 +56,10 @@ function add_comma(s: string): string {
       ? raw[i] + ", "
       : is_letter(raw[i]) && raw[i + 1] == "'"
       ? raw[i] + " "
+      : is_letter(raw[i]) && /^[A-Z]$/.test(raw[i + 1]) || is_number(raw[i]) && /^[A-Z]$/.test(raw[i + 1])
+      ? raw[i] + ". "
       : raw[i];
+    // Ternary expressions my beloved
   }
 
   return build;
@@ -67,7 +70,7 @@ function is_letter(char: string): boolean {
 function is_number(char: string): boolean {
   return /^[0-9]$/.test(char)
 }
-export interface RawItem {
+export interface RawItem { // For raw json objects
   name: string,
   damage: string,
   usetime: string,
@@ -82,7 +85,7 @@ export interface RawItem {
   pick: string,
   type: string
 }
-export interface Item {
+export interface Item { // For clean, usable data
   name: string,
   damage: number | undefined,
   usetime: number | undefined,

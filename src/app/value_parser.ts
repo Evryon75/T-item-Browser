@@ -35,12 +35,14 @@ export function parse_item(obj: RawItem): Item {
   if (obj.mana != null) result.mana = parse_num(strip_html(obj.mana));
   if (obj.type != null) result.type = strip_html(obj.type);
 
+  // Categorise with tags
   if (result.pick != undefined || result.axe != undefined || result.hammer != undefined) result.tag = Tag.Tool;
   else if (result.defense != undefined) result.tag = Tag.Equipable;
   else if (result.damage != undefined && !(result.type.split("^")[0] == "ammunition")) result.tag = Tag.Weapon;
 
   return result;
 }
+
 
 function parse_num(raw: string): number {
   let raw_vec = raw.split("");
@@ -62,10 +64,7 @@ function try_parse(possible_number: string): boolean {
   try {
     parseFloat(possible_number)
     result = true;
-  } catch (e) {
-    //! Remove in production
-    console.log("Escaped html found")
-  }
+  } catch (e) {}
 
   return result
 }

@@ -1,5 +1,5 @@
-import {Component, signal, ViewChild} from '@angular/core';
-import {format_image, Item} from "../helper_module";
+import {Component} from '@angular/core';
+import {Item} from "../helper_module";
 import {HttpClient} from "@angular/common/http";
 import {TOOL_LIST} from "../global_data";
 

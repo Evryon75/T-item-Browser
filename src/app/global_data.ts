@@ -3,24 +3,6 @@ import {Item, Tag} from "./helper_module";
 export let TOOL_LIST: Item[] = []
 export let WEAPON_LIST: Item[] = []
 export let EQUIPABLE_LIST: Item[] = []
-
-export let SELECTION: Item = {
-  axe: undefined,
-  critical: undefined,
-  damage: undefined,
-  defense: undefined,
-  hammer: undefined,
-  knockback: undefined,
-  mana: undefined,
-  name: "",
-  pick: undefined,
-  tooltip: undefined,
-  usetime: undefined,
-  velocity: undefined,
-  tag: Tag.Weapon,
-  type: ""
-};
-
 export function reset() {
 
   WEAPON_LIST = [];
